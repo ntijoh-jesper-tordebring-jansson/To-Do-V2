@@ -3,8 +3,6 @@ class TodoList extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(this.#template());
-
-
         this.itemObject = {};
         this.count = 0;
     }
