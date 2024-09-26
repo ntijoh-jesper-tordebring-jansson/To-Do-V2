@@ -1,3 +1,3 @@
 # JS-ToDo
 
-ToDo front-end application coded in JavaScript. 
+ToDo front-end application coded in JavaScript with Web Components. 
