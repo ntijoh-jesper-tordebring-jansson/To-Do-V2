@@ -2,21 +2,30 @@ class TodoList extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="index.css">
-            <h1 class="item-title">Add Items</h1>
-            <input class="input-item" id="add-name" placeholder="Item name">
-            <button class="submit-button" id="submitButton">Add Item</button>
-            <div class="line"></div>
-            <input class="search-item" id="search" placeholder="Search items...">
-            <div class="line"></div>
-            <h2>Items</h2>
-            <ul id="item-list"></ul>
-        `;
+        this.shadowRoot.appendChild(this.#template());
+
 
         this.itemObject = {};
         this.count = 0;
     }
+
+    #template() {
+        const template = document.createElement('template')
+        template.innerHTML =
+        `
+        <link rel="stylesheet" href="index.css">
+        <h1 class="item-title">Add Items</h1>
+        <input class="input-item" id="add-name" placeholder="Item name">
+        <button class="submit-button" id="submitButton">Add Item</button>
+        <div class="line"></div>
+        <input class="search-item" id="search" placeholder="Search items...">
+        <div class="line"></div>
+        <h2>Items</h2>
+        <ul id="item-list"></ul>
+        `;
+        return template.content.cloneNode(true);
+    }
+
 
     connectedCallback() {
         this.shadowRoot.querySelector('#submitButton').addEventListener('click', () => this.addItem());
