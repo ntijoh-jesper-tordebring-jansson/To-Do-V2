@@ -3,6 +3,7 @@ class TodoList extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.innerHTML = `
+            <link rel="stylesheet" href="index.css">
             <h1 class="item-title">Add Items</h1>
             <input class="input-item" id="add-name" placeholder="Item name">
             <button class="submit-button" id="submitButton">Add Item</button>
@@ -21,6 +22,9 @@ class TodoList extends HTMLElement {
         this.shadowRoot.querySelector('#submitButton').addEventListener('click', () => this.addItem());
         this.shadowRoot.querySelector('#search').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.searchItem();
+        });
+        this.shadowRoot.querySelector('#add-name').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.addItem();
         });
     }
 
@@ -56,7 +60,7 @@ class TodoList extends HTMLElement {
     addItemToDOM(key) {
         const itemList = this.shadowRoot.querySelector('#item-list');
         const newItem = document.createElement('li');
-        newItem.innerHTML = `<span>${this.itemObject[key]}</span> <button>X</button>`;
+        newItem.innerHTML = `<span class="item-text">${this.itemObject[key]}</span> <button class="remove-button">X</button>`;
         newItem.querySelector('button').addEventListener('click', () => {
             delete this.itemObject[key];
             this.updateItemList();
